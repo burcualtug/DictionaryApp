@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "939258903151",
+    "project_id": "dictionarymvvm",
+    "storage_bucket": "dictionarymvvm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:939258903151:android:a43c384b8eb142fa9dab9a",
+        "android_client_info": {
+          "package_name": "com.orion.dictionarymvvm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "939258903151-8jo3k0tus0sm8q1cutmfhtuh8pmpulde.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.orion.dictionarymvvm",
+            "certificate_hash": "7d3a438bb66680cc73002376496cda24d529c33b"
+          }
+        },
+        {
+          "client_id": "939258903151-lilvjb8s0shrs2lhhhu69outeob2qv52.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqr0OyK4llEV8YC0eO0PmTighvUxMfsL4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "939258903151-lilvjb8s0shrs2lhhhu69outeob2qv52.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
