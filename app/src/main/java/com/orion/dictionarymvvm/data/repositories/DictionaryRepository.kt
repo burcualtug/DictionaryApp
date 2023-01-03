@@ -40,4 +40,6 @@ class DictionaryRepository (
 
     suspend fun getData() : List<Words> = firebase.getData()
 
+    fun addFav(mail: String, wordid: String, english: String, turkish: String) = firebase.addFav(mail, wordid, english, turkish)
+
 }

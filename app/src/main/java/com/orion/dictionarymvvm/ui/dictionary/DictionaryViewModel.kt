@@ -67,6 +67,9 @@ class DictionaryViewModel(
     }
 
 
+    fun addFav(mail: String, wordid: String, english: String, turkish: String) {
+        repository.addFav(mail,wordid,english,turkish)
+    }
     fun addWord() {
         if(english.isNullOrEmpty() || turkish.isNullOrEmpty()){
             authListener?.onFailure("Please fill the blanks")

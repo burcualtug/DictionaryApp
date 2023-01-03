@@ -153,7 +153,42 @@ class FirebaseSource {
                 }
         }
 
-    fun addFav(wordid: String, english: String, turkish: String) {
+    fun addFav(mail: String, wordid: String, english: String, turkish: String){
+        val word = hashMapOf(
+            "wordid" to wordid,
+            "english" to english,
+            "turkish" to turkish
+        )
+
+        var flag: Int = 0
+        db.collection("users2").document(mail).collection("favwords")
+            .whereEqualTo("english", english)
+            .whereEqualTo("turkish", turkish)
+            .get()
+            .addOnCompleteListener { task1 ->
+                for (document in task1.result) {
+                    //Fetch from database as Map
+                    if (document == task1.result) {
+                    } else {
+                        flag = 1
+                        //Toast.makeText(activity, "Already in list", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                if (flag != 1) {
+                    db.collection("users2").document(mail).collection("favwords")
+                        .add(word)
+                        .addOnSuccessListener {
+                            //Toast.makeText(activity, "Added to Fav!", Toast.LENGTH_SHORT).show()
+                        }
+                        .addOnFailureListener { e ->
+                            Log.w("TAG", "Error adding document", e)
+                            //Toast.makeText(activity, "Error adding document", Toast.LENGTH_SHORT).show()
+                        }
+                    //Toast.makeText(activity, "Added to Fav!", Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+    fun addFavv(mail: String, wordid: String, english: String, turkish: String) {
         val word = hashMapOf(
             "wordid" to wordid,
             "english" to english,

@@ -18,7 +18,6 @@ import com.google.firebase.ktx.Firebase
 import com.orion.dictionarymvvm.R
 import com.orion.dictionarymvvm.data.firebase.Words
 import com.orion.dictionarymvvm.databinding.FragmentDictionaryBinding
-import org.checkerframework.checker.index.qual.LengthOf
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
@@ -69,8 +68,6 @@ class DictionaryFragment : Fragment(), KodeinAware {
         // binding = FragmentDictionaryBinding.inflate(layoutInflater)
         //
         Log.d("ADEM", "onCreate: ")
-
-
     }
 
 
@@ -88,8 +85,8 @@ class DictionaryFragment : Fragment(), KodeinAware {
             binding.viewmodel = viewModel
         }
 
-        binding.currentname.text = firebaseAuth2.currentUser?.email.toString()
-            //viewModel.user.toString()
+        //binding.currentname.text =
+
         binding.jsonList.removeAllViewsInLayout()
         val layout = LinearLayoutManager(activity)
         binding.jsonList.layoutManager = layout
@@ -103,7 +100,7 @@ class DictionaryFragment : Fragment(), KodeinAware {
 
         customAdapter.setItemClickListener(object : CustomAdapter.ItemClickListener {
             override fun onItemClick(position: Int) {
-                //addFav(customAdapter.getItem(position)!!.wordid,customAdapter.getItem(position)!!.english,customAdapter.getItem(position)!!.turkish)
+                viewModel.addFav(firebaseAuth2.currentUser?.email.toString(), customAdapter.getItem(position)!!.wordid,customAdapter.getItem(position)!!.english,customAdapter.getItem(position)!!.turkish)
             }
 
             override fun onItemClicked(item: Words) {
