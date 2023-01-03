@@ -44,7 +44,7 @@ class SignupActivity : AppCompatActivity(), AuthListener, KodeinAware {
         }
     }
 
-    override fun onSuccess() {
+    override fun onSuccess(message: String) {
         progressbar.visibility = View.GONE
         startHomeActivity()
     }

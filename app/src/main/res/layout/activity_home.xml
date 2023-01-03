@@ -8,29 +8,42 @@
             type="com.orion.dictionarymvvm.ui.home.HomeViewModel"/>
     </data>
 
-    <RelativeLayout
-        android:id="@+id/drawer_layout"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.home.HomeActivity">
+        tools:context="com.orion.dictionarymvvm.ui.auth.HomeActivity"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView">
 
-        <TextView
-            android:text="@{viewmodel.user.email}"
-            tools:text="probelalkhan@gmail.com"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            android:layout_centerInParent="true"
-            android:id="@+id/textViewEmail"
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:menu="@menu/menu_bar" />
 
-        <Button
-            android:onClick="@{(v) -> viewmodel.logout(v)}"
-            android:text="Logout"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/textViewEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    </RelativeLayout>
+            <ImageView
+                android:visibility="visible"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="350dp"
+                android:layout_marginTop="70dp"
+                android:layout_marginRight="5dp"
+                android:onClick="@{(v) -> viewmodel.logout(v)}"
+                android:src="@drawable/ic_baseline_sensor_door_24" />
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </layout>

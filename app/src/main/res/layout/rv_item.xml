@@ -1,0 +1,57 @@
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:backgroundTint="@color/white"
+    android:layout_margin="10dp"
+    tools:ignore="MissingClass">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:orientation="vertical">
+    </RelativeLayout>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="2"
+        android:rowCount="2">
+        <ImageView
+            android:layout_marginLeft="20dp"
+            android:layout_height="30dp"
+            android:layout_width="30dp"
+            android:src="@drawable/uk"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_marginLeft="15dp"
+            android:id="@+id/rv_english"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+        <ImageView
+            android:layout_height="30dp"
+            android:layout_width="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/turkey"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"/>
+        <TextView
+            android:id="@+id/rv_turkish"
+            android:layout_marginLeft="15dp"
+            android:textSize="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rv_english"
+            android:layout_marginTop="10dp"
+            android:autoLink="web"/>
+    </GridLayout>
+</androidx.cardview.widget.CardView>

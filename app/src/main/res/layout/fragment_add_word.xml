@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="viewmodel"
+            type="com.orion.dictionarymvvm.ui.dictionary.DictionaryViewModel"/>
+    </data>
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    tools:context=".ui.dictionary.AddWordFragment"
+    android:layout_margin="20dp">
+
+        <EditText
+            android:id="@+id/addEng"
+            android:text="@={viewmodel.english}"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="english" />
+
+        <EditText
+            android:id="@+id/addTr"
+            android:text="@={viewmodel.turkish}"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="turkish" />
+
+    <LinearLayout
+        android:layout_width="270dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/add"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_marginRight="70dp"
+            android:text="ADD"
+            android:onClick="@{ _ -> viewmodel.addWord()}"
+            android:layout_gravity="center_horizontal" />
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:text="CANCEL"
+            android:onClick="@{ _-> viewmodel.cancel()}"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
+
+</LinearLayout>
+
+</layout>

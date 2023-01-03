@@ -1,11 +1,8 @@
 package com.orion.dictionarymvvm.ui.auth
 
 
-import android.content.Context
 import android.content.Intent
-import android.net.ConnectivityManager
 import android.view.View
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.ViewModel
 import com.orion.dictionarymvvm.data.repositories.UserRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -52,12 +49,12 @@ class AuthViewModel(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 //sending a success callback
-                authListener?.onSuccess()
+                authListener?.onSuccess("Success")
             }, {
                 //sending a failure callback
                 authListener?.onFailure(it.message!!)
             })
-        disposables.add(disposable)
+
     }
 
     //Doing same thing with signup
@@ -71,7 +68,7 @@ class AuthViewModel(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                authListener?.onSuccess()
+                authListener?.onSuccess("Success")
             }, {
                 authListener?.onFailure(it.message!!)
             })
@@ -80,6 +77,7 @@ class AuthViewModel(
 
 
 
+//goTo functions are calling by xml
     fun goToSignup(view: View) {
         Intent(view.context, SignupActivity::class.java).also {
             view.context.startActivity(it)

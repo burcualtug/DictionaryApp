@@ -3,8 +3,11 @@ package com.orion.dictionarymvvm
 
 import android.app.Application
 import com.orion.dictionarymvvm.data.firebase.FirebaseSource
+import com.orion.dictionarymvvm.data.repositories.DictionaryRepository
 import com.orion.dictionarymvvm.data.repositories.UserRepository
 import com.orion.dictionarymvvm.ui.auth.AuthViewModelFactory
+import com.orion.dictionarymvvm.ui.dictionary.AddWordFragment
+import com.orion.dictionarymvvm.ui.dictionary.DictionaryViewModelFactory
 import com.orion.dictionarymvvm.ui.home.HomeViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -21,8 +24,10 @@ class FirebaseApplication : Application(), KodeinAware{
 
         bind() from singleton { FirebaseSource() }
         bind() from singleton { UserRepository(instance()) }
+        bind() from singleton { DictionaryRepository(instance()) }
         bind() from provider { AuthViewModelFactory(instance()) }
         bind() from provider { HomeViewModelFactory(instance()) }
+        bind() from provider { DictionaryViewModelFactory(instance()) }
 
     }
 }

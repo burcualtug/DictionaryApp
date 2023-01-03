@@ -31,8 +31,6 @@ class LoginActivity : AppCompatActivity(), AuthListener, KodeinAware {
         viewModel = ViewModelProviders.of(this, factory).get(AuthViewModel::class.java)
         binding.viewmodel = viewModel
 
-        binding.viewmodel=viewModel
-
         viewModel.authListener = this
     }
 
@@ -40,7 +38,7 @@ class LoginActivity : AppCompatActivity(), AuthListener, KodeinAware {
         progressbar.visibility = View.VISIBLE
     }
 
-    override fun onSuccess() {
+    override fun onSuccess(message: String) {
         progressbar.visibility = View.GONE
         startHomeActivity()
     }
