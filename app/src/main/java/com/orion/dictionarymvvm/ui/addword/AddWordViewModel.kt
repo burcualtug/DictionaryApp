@@ -25,7 +25,6 @@ class AddWordViewModel(
 
     var english: String? = null
     var turkish: String? = null
-    //val mail : String = firebaseAuth2.currentUser?.email.toString()
 
     var authListener: AuthListener? = null
 
@@ -36,21 +35,19 @@ class AddWordViewModel(
     fun uuidGenerator(): String {
         return String.format("%040d", BigInteger(UUID.randomUUID().toString().replace("-", ""), 16))
     }
-    fun add() {
-        english?.let {
-            turkish?.let { it1 ->
-                addWord(
-                    firebaseAuthAddWord.currentUser?.email.toString(),
-                    uuidGenerator(),
-                    it,
-                    it1
-                )
-            }
-        }
-    }
 
- fun addWord(mail: String, wordid:String, english: String, turkish: String){
-     repository.addWord(mail,wordid,english,turkish)
+ fun addWord(){
+     english?.let { Log.d("english", it) }
+     turkish?.let { Log.d("turkish", it) }
+
+     english?.let {
+         turkish?.let { it1 ->
+             repository.addWord(
+                 firebaseAuthAddWord.currentUser?.email.toString(),uuidGenerator(),
+                 it, it1
+             )
+         }
+     }
      Log.d("TAG", "ADDED THE WORD")
  }
 }

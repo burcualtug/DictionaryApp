@@ -54,6 +54,7 @@ class AddWordFragment() : DialogFragment(),KodeinAware {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("TAG","Burcu")
     }
 
     override fun onCreateView(
@@ -67,13 +68,10 @@ class AddWordFragment() : DialogFragment(),KodeinAware {
             binding.viewmodel = viewModel
         }
 
-        fun uuidGenerator(): String {
-            return String.format("%040d", BigInteger(UUID.randomUUID().toString().replace("-", ""), 16))
-        }
-
         binding.cancel.setOnClickListener { Log.d("TAG", "dismissed")
             dismiss() }
-        viewModel.addWord(firebaseAuthAddWord.currentUser?.email.toString(),uuidGenerator(),binding.addEng.toString(), binding.addTr.toString())
+
+        binding.add.setOnClickListener { viewModel.addWord() }
 
         return binding.root
     }

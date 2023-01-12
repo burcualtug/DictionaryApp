@@ -27,6 +27,7 @@ class FirebaseSource {
     //val repository: DictionaryRepository = TODO()
     var Wordlist = arrayListOf<Words>()
     var Favlist = arrayListOf<Words>()
+    var Addedlist = arrayListOf<Words>()
 
     var db = Firebase.firestore
     private val firebaseAuth: FirebaseAuth by lazy {
@@ -196,6 +197,28 @@ class FirebaseSource {
                 }
         }
 
+    suspend fun getDataAdded(mail:String) =
+        suspendCoroutine<List<Words>> {
+            db.collection("users2").document(mail).collection("addedwords")
+                .get()
+                .addOnSuccessListener { result ->
+                    for (document in result) {
+                        Log.d(TAG, "${document.id} => ${document.data}")
+                        val word = Words(
+                            document.data["wordid"].toString(),
+                            document.data["english"].toString(),
+                            document.data["turkish"].toString()
+                        )
+                        Addedlist.add(word)
+                    }
+                    it.resume(Addedlist)
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error getting documents.", exception)
+                    it.resume(Addedlist)
+                }
+        }
+
     fun addFav(mail: String, wordid: String, english: String, turkish: String){
         val word = hashMapOf(
             "wordid" to wordid,
@@ -232,7 +255,7 @@ class FirebaseSource {
             }
     }
 
-    fun addWord(mail:String, wordid: String, english: String, turkish: String) = Completable.create{ emitter ->
+    fun addWord(mail:String, wordid: String, english: String, turkish: String) {
         Log.d("TAG", "ADDED THE WORD2")
         var db = Firebase.firestore
         val word = hashMapOf(

@@ -109,6 +109,8 @@ class DictionaryFragment : Fragment(), KodeinAware {
                 customAdapter.filter.filter(s)
             }
         })
+
+
         binding.addWord.setOnClickListener(){
             addWord()
         }

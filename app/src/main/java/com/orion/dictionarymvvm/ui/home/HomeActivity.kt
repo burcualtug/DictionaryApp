@@ -55,7 +55,7 @@ class HomeActivity : AppCompatActivity(), KodeinAware {
                 R.id.dictionary -> replaceFragment(com.orion.dictionarymvvm.ui.dictionary.DictionaryFragment())
                 R.id.fav -> replaceFragment(com.orion.dictionarymvvm.ui.fav.FavFragment())
                 R.id.learn -> replaceFragment(com.orion.dictionarymvvm.ui.learn.LearnFragment())
-                R.id.addWord -> replaceFragment(com.orion.dictionarymvvm.ui.dictionary.DictionaryFragment())
+                R.id.addWord -> replaceFragment(com.orion.dictionarymvvm.ui.addedwords.AddedWordsFragment())
                 else -> {
 
                 }

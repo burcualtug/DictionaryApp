@@ -41,7 +41,6 @@
                 android:layout_height="60dp"
                 android:layout_marginRight="70dp"
                 android:text="ADD"
-                android:onClick="@{ _ -> viewmodel.add()}"
                 android:layout_gravity="center_horizontal" />
 
             <Button

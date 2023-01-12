@@ -16,6 +16,8 @@ class DictionaryRepository (
 
     suspend fun getDataFav(mail: String) : List<Words> = firebase.getDataFav(mail)
 
+    suspend fun getDataAdded(mail: String) : List<Words> = firebase.getDataAdded(mail)
+
     fun addFav(mail: String, wordid: String, english: String, turkish: String) = firebase.addFav(mail, wordid, english, turkish)
 
     fun setLevel(mail: String, wordid: String, level: String) = firebase.setLevel(mail,wordid,level)
