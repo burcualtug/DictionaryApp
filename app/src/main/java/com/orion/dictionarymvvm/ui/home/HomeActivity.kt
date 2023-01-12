@@ -54,14 +54,21 @@ class HomeActivity : AppCompatActivity(), KodeinAware {
 
                 R.id.dictionary -> replaceFragment(com.orion.dictionarymvvm.ui.dictionary.DictionaryFragment())
                 R.id.fav -> replaceFragment(com.orion.dictionarymvvm.ui.fav.FavFragment())
-                R.id.learn -> replaceFragment(com.orion.dictionarymvvm.ui.dictionary.DictionaryFragment())
-
+                R.id.learn -> replaceFragment(com.orion.dictionarymvvm.ui.learn.LearnFragment())
+                R.id.addWord -> replaceFragment(com.orion.dictionarymvvm.ui.dictionary.DictionaryFragment())
                 else -> {
 
                 }
             }
             true
         }
+    }
+    private fun replaceFragment(fragment: Fragment) {
+
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.frame_layout, fragment)
+        fragmentTransaction.commit()
     }
 
     @SuppressLint("DefaultLocale")
@@ -90,8 +97,6 @@ class HomeActivity : AppCompatActivity(), KodeinAware {
 
         }
     }
-
-
     fun fillData(wordid: String, english: String, turkish: String) {
         val word = hashMapOf(
             "wordid" to wordid,
@@ -101,12 +106,6 @@ class HomeActivity : AppCompatActivity(), KodeinAware {
         db.collection("dictionary").add(word)
     } */
 
-    private fun replaceFragment(fragment: Fragment) {
 
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frame_layout, fragment)
-        fragmentTransaction.commit()
-    }
 
 }

@@ -33,11 +33,11 @@
                 android:id="@+id/addWord"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
+                android:background="@drawable/rounded_corner"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="60dp"
                 android:text="Add New Word!"
                 android:textColor="@color/white"
-                android:onClick="@{() -> viewmodel.addWord()}"
                 android:textSize="13dp" />
 
 
@@ -63,13 +63,13 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_marginLeft="350dp"
-                        android:layout_marginTop="70dp"
+                        android:layout_marginTop="50dp"
                         android:layout_marginRight="5dp"
                         android:onClick="@{(v) -> viewmodel.logout(v)}"
-                        android:src="@drawable/ic_baseline_sensor_door_24"
+                        android:src="@drawable/logout"
                         android:visibility="visible" />
                 </RelativeLayout>
             </RelativeLayout>

@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/buraltug/Desktop/Android/dictionaryMVVM/app/src/main/res/drawable-v24/ic_baseline_add_24.xml" value="0.118" />
         <entry key="..\:/Users/buraltug/Desktop/Android/dictionaryMVVM/app/src/main/res/drawable/ic_add.xml" value="0.12" />
+        <entry key="..\:/Users/buraltug/Desktop/Android/dictionaryMVVM/app/src/main/res/drawable/ic_boy.xml" value="0.118" />
+        <entry key="..\:/Users/buraltug/Desktop/Android/dictionaryMVVM/app/src/main/res/drawable/rounded_corner.xml" value="0.10666666666666667" />
+        <entry key="..\:/Users/buraltug/Desktop/Android/dictionaryMVVM/app/src/main/res/drawable/rounded_corner2.xml" value="0.1" />
         <entry key="..\:/Users/buraltug/Desktop/Android/dictionaryMVVM/app/src/main/res/layout/activity_fill_data.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/buraltug/Desktop/Android/dictionaryMVVM/app/src/main/res/layout/activity_home.xml" value="0.14666666666666667" />
         <entry key="..\:/Users/buraltug/Desktop/Android/dictionaryMVVM/app/src/main/res/layout/activity_login.xml" value="0.16510416666666666" />
@@ -11,11 +15,14 @@
         <entry key="..\:/Users/buraltug/Desktop/Android/dictionaryMVVM/app/src/main/res/layout/activity_words.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/buraltug/Desktop/Android/dictionaryMVVM/app/src/main/res/layout/content_words.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/buraltug/Desktop/Android/dictionaryMVVM/app/src/main/res/layout/fragment_add_word.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/buraltug/Desktop/Android/dictionaryMVVM/app/src/main/res/layout/fragment_add_word2.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/buraltug/Desktop/Android/dictionaryMVVM/app/src/main/res/layout/fragment_dictionary.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/buraltug/Desktop/Android/dictionaryMVVM/app/src/main/res/layout/fragment_fav.xml" value="0.1" />
+        <entry key="..\:/Users/buraltug/Desktop/Android/dictionaryMVVM/app/src/main/res/layout/fragment_learn.xml" value="0.12" />
         <entry key="..\:/Users/buraltug/Desktop/Android/dictionaryMVVM/app/src/main/res/layout/rv_item.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/buraltug/Desktop/Android/dictionaryMVVM/app/src/main/res/layout/rv_item_fav.xml" value="0.178125" />
         <entry key="..\:/Users/buraltug/Desktop/Android/dictionaryMVVM/app/src/main/res/menu/menu_bar.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/buraltug/Desktop/Android/dictionaryMVVM/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.118" />
       </map>
     </option>
   </component>

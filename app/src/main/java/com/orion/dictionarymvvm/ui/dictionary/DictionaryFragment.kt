@@ -18,6 +18,7 @@ import com.google.firebase.ktx.Firebase
 import com.orion.dictionarymvvm.R
 import com.orion.dictionarymvvm.data.firebase.Words
 import com.orion.dictionarymvvm.databinding.FragmentDictionaryBinding
+import com.orion.dictionarymvvm.ui.addword.AddWordFragment
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
@@ -50,23 +51,13 @@ class DictionaryFragment : Fragment(), KodeinAware {
     var db = Firebase.firestore
 
     fun addWord(){
-
-        Log.d("TAG", "addWord first")
         var dialog = AddWordFragment()
-
-        Log.d("TAG", "addWord second")
         dialog.show(parentFragmentManager, "AddWordFragment")
-
-        Log.d("TAG", "addWord third")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        //val binding: FragmentDictionaryBinding? = activity?.let { DataBindingUtil.setContentView(it, R.layout.fragment_dictionary) }
-
-        // binding = FragmentDictionaryBinding.inflate(layoutInflater)
-        //
         Log.d("ADEM", "onCreate: ")
     }
 
@@ -84,9 +75,6 @@ class DictionaryFragment : Fragment(), KodeinAware {
         if (binding != null) {
             binding.viewmodel = viewModel
         }
-
-        //binding.currentname.text =
-
         binding.jsonList.removeAllViewsInLayout()
         val layout = LinearLayoutManager(activity)
         binding.jsonList.layoutManager = layout
@@ -131,7 +119,6 @@ class DictionaryFragment : Fragment(), KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d("ADEM", "onCreateViewCreated: ")
-
     }
 
     override fun onResume() {

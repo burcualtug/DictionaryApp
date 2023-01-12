@@ -1,6 +1,5 @@
 package com.orion.dictionarymvvm.ui.dictionary
 
-import android.annotation.SuppressLint
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
@@ -11,8 +10,12 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.orion.dictionarymvvm.data.firebase.Words
 import com.orion.dictionarymvvm.data.repositories.DictionaryRepository
+import com.orion.dictionarymvvm.ui.addword.AddWordFragment
 import com.orion.dictionarymvvm.ui.auth.AuthListener
 import com.orion.dictionarymvvm.utils.startLoginActivity
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import java.math.BigInteger
 import java.util.*
@@ -25,18 +28,19 @@ class DictionaryViewModel(
     val wordData : LiveData<List<Words>>
         get() = _wordData
 
+    var authListener: AuthListener? = null
+    //val connectionManager : ConnectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+
+    //disposable to dispose the Completable
+    private val disposables = CompositeDisposable()
     var db = Firebase.firestore
 
     val TAG: String = "TAG"
 
     var Wordlist = arrayListOf<Words>()
-
-    //val customAdapter = CustomAdapter(this, Wordlist,this)
-
     var english: String? = null
     var turkish: String? = null
-
-    var authListener: AuthListener? = null
 
     val user by lazy {
         repository.currentUser()
@@ -47,10 +51,6 @@ class DictionaryViewModel(
     }
 
 
-    fun cancel(){
-        //dismiss()
-    }
-
     fun uuidGenerator(): String {
         return String.format("%040d", BigInteger(UUID.randomUUID().toString().replace("-", ""), 16))
     }
@@ -60,35 +60,12 @@ class DictionaryViewModel(
     }
     fun getData() {
         viewModelScope.launch {
-            Log.d("ADEM", "getData: ")
             _wordData.value = repository.getData()
         }
-
     }
-
 
     fun addFav(mail: String, wordid: String, english: String, turkish: String) {
         repository.addFav(mail,wordid,english,turkish)
-    }
-    fun addWord() {
-        if(english.isNullOrEmpty() || turkish.isNullOrEmpty()){
-            authListener?.onFailure("Please fill the blanks")
-            return
-        }
-        //authentication started
-        authListener?.onStarted()
-
-        //val addResult =
-        repository.addWord(english!!, turkish!!)
-
-        authListener?.onSuccess("Succesfully added!")
-        /*addResult.addOnCompleteListener(getActivity(this)) {task->
-            if (task.isSuccessful) {
-                authListener?.onSuccess()
-            } else {
-                authListener?.onFailure(task.exception!!.message.toString())
-            }
-        }*/
     }
 
 

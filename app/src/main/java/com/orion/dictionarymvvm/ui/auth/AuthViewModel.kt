@@ -74,9 +74,6 @@ class AuthViewModel(
             })
         disposables.add(disposable)
     }
-
-
-
 //goTo functions are calling by xml
     fun goToSignup(view: View) {
         Intent(view.context, SignupActivity::class.java).also {

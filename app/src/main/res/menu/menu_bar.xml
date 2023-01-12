@@ -5,6 +5,10 @@
         android:icon="@drawable/ic_baseline_book_24"
         android:title="Dictionary" />
     <item
+        android:id="@+id/addWord"
+        android:icon="@drawable/ic_baseline_add_24"
+        android:title="AddWord" />
+    <item
         android:id="@+id/fav"
         android:icon="@drawable/ic_baseline_favorite_24"
         android:title="Fav" />

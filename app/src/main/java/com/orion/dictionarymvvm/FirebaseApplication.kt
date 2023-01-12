@@ -5,10 +5,14 @@ import android.app.Application
 import com.orion.dictionarymvvm.data.firebase.FirebaseSource
 import com.orion.dictionarymvvm.data.repositories.DictionaryRepository
 import com.orion.dictionarymvvm.data.repositories.UserRepository
+import com.orion.dictionarymvvm.ui.addword.AddWordViewModel
+import com.orion.dictionarymvvm.ui.addword.AddWordViewModelFactory
 import com.orion.dictionarymvvm.ui.auth.AuthViewModelFactory
-import com.orion.dictionarymvvm.ui.dictionary.AddWordFragment
+import com.orion.dictionarymvvm.ui.addword.AddWordFragment
 import com.orion.dictionarymvvm.ui.dictionary.DictionaryViewModelFactory
+import com.orion.dictionarymvvm.ui.fav.FavViewModelFactory
 import com.orion.dictionarymvvm.ui.home.HomeViewModelFactory
+import com.orion.dictionarymvvm.ui.learn.LearnViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -28,6 +32,9 @@ class FirebaseApplication : Application(), KodeinAware{
         bind() from provider { AuthViewModelFactory(instance()) }
         bind() from provider { HomeViewModelFactory(instance()) }
         bind() from provider { DictionaryViewModelFactory(instance()) }
+        bind() from provider { FavViewModelFactory(instance())}
+        bind() from provider { AddWordViewModelFactory(instance()) }
+        bind() from provider { LearnViewModelFactory(instance()) }
 
     }
 }

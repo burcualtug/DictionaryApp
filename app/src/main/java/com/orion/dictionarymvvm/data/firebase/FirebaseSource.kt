@@ -2,9 +2,11 @@ package com.orion.dictionarymvvm.data.firebase
 
 import android.annotation.SuppressLint
 import android.util.Log
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.orion.dictionarymvvm.data.repositories.DictionaryRepository
 import com.orion.dictionarymvvm.databinding.FragmentDictionaryBinding
 import com.orion.dictionarymvvm.ui.dictionary.CustomAdapter
 //import com.orion.dictionarymvvm.ui.dictionary.binding
@@ -22,16 +24,10 @@ class FirebaseSource {
     val TAG: String = "TAG"
 
     private lateinit var binding: FragmentDictionaryBinding
-//    val repository: DictionaryRepository = TODO()
+    //val repository: DictionaryRepository = TODO()
     var Wordlist = arrayListOf<Words>()
- //   lateinit var activity: Activity
-    /*lateinit var fragment: Fragment
+    var Favlist = arrayListOf<Words>()
 
-    init {
-        fragment = DictionaryFragment()
-    }*/
-
-    //val customAdapter = CustomAdapter(this, Wordlist,this)
     var db = Firebase.firestore
     private val firebaseAuth: FirebaseAuth by lazy {
         FirebaseAuth.getInstance()
@@ -76,61 +72,86 @@ class FirebaseSource {
 
     @SuppressLint("DefaultLocale")
     fun uuidGenerator(): String {
-
         return String.format("%040d", BigInteger(UUID.randomUUID().toString().replace("-", ""), 16))
     }
 
-    fun addWord(english: String, turkish: String) = Completable.create{ emitter ->
-            var db = Firebase.firestore
-            val word = hashMapOf(
-                "wordid" to uuidGenerator(),
-                "english" to english,
-                "turkish" to turkish
-            )
-            db.collection("dictionary")
-                .add(word)
-                .addOnSuccessListener { documentReference ->
-                    //Toast.makeText(this, "New Word Added!", Toast.LENGTH_SHORT).show()
-                    Log.d("TAG", "DocumentSnapshot added with ID: ${documentReference.id}")
+
+    suspend fun getLevel(mail: String, level: String)=
+        suspendCoroutine<Int> {
+            var count = 0
+            db.collection("users2")
+                .document(mail)
+                .collection("learning")
+                .whereEqualTo("level",level)
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val result = task.result
+                        count = result!!.size()
+                        it.resume(count)
+                        Log.d("Firestore", "Collection size: $count")
+                    } else {
+                        Log.e("Firestore", "Error getting documents: ${task.exception}")
+                    }
                 }
-                .addOnFailureListener { e ->
-                    //Toast.makeText(activity, "CANNOT ADDED", Toast.LENGTH_SHORT).show()
-                    Log.w("TAG", "Error adding document", e)
-                }
+        }
 
+    suspend fun getLevelID0()=
+        suspendCoroutine <String> {
+                val rnd2 = (0 until 2000).random()
+                db.collection("dictionary")
+                    .get()
+                    .addOnCompleteListener { task1 ->
+                        if (task1.isSuccessful) {
+                            val oneWordId = task1.result.documents[rnd2].get("wordid").toString()
+                            it.resume(oneWordId)
+                        }
+                    }
+        }
 
-    }
+    suspend fun getLevelID1(mail: String, size: Int)=
 
-
-    /*fun getData() {
-        /*binding.jsonList.removeAllViewsInLayout()
-        //val layout = LinearLayoutManager(activity)
-        binding.jsonList.adapter = customAdapter
-        //binding.jsonList.layoutManager = layout
-        binding.jsonList.setHasFixedSize(true)
-        Wordlist.clear() */
-        db.collection("dictionary")
-            .get().addOnSuccessListener { documents ->
-                for (document in documents) {
-                    Wordlist.add(
-                        Words(
-                            document.data["id"].toString(), //burada normalde sadece id yaziyodu
-                            document.data["english"].toString(),
-                            document.data["turkish"].toString()
-                        )
-                    )
-                    Log.d(TAG, "${document.id} => ${document.data.get("english")}")
-                }
-            }.addOnFailureListener { Exception ->
-                Log.e(TAG, "get failed with", Exception);
-                //Toast.makeText(activity, "loading chamber", Toast.LENGTH_SHORT).show()
+        suspendCoroutine <String> {
+            if (size>0){
+                val rnd2 = (0 until size).random()
+                db.collection("users2")
+                    .document(mail)
+                    .collection("learning")
+                    .whereEqualTo("level","1")
+                    .get()
+                    .addOnCompleteListener { task1 ->
+                        if (task1.isSuccessful) {
+                            val oneWordId = task1.result.documents[rnd2].get("wordid").toString()
+                            it.resume(oneWordId)
+                        }
+                    }
             }
+            else if(size==0){
+                it.resume("0131820956425567970354070760026269803851")
+            }
+        }
 
+    suspend fun getLevelID2(mail: String, size: Int)=
+        suspendCoroutine <String> {
+            if (size>0){
+                val rnd2 = (0 until size).random()
+                db.collection("users2")
+                    .document(mail)
+                    .collection("learning")
+                    .whereEqualTo("level","2")
+                    .get()
+                    .addOnCompleteListener { task1 ->
+                        if (task1.isSuccessful) {
+                            val oneWordId = task1.result.documents[rnd2].get("wordid").toString()
+                            it.resume(oneWordId)
 
-
-    } */
-
-
+                        }
+                    }
+            }
+            else if(size==0){
+                it.resume("0338996114965402549244662037962371997874")
+            }
+        }
     suspend fun getData() =
         suspendCoroutine<List<Words>> {
             db.collection("dictionary")
@@ -153,6 +174,28 @@ class FirebaseSource {
                 }
         }
 
+    suspend fun getDataFav(mail:String) =
+        suspendCoroutine<List<Words>> {
+            db.collection("users2").document(mail).collection("favwords")
+                .get()
+                .addOnSuccessListener { result ->
+                    for (document in result) {
+                        Log.d(TAG, "${document.id} => ${document.data}")
+                        val word = Words(
+                            document.data["wordid"].toString(),
+                            document.data["english"].toString(),
+                            document.data["turkish"].toString()
+                        )
+                        Favlist.add(word)
+                    }
+                    it.resume(Favlist)
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error getting documents.", exception)
+                    it.resume(Favlist)
+                }
+        }
+
     fun addFav(mail: String, wordid: String, english: String, turkish: String){
         val word = hashMapOf(
             "wordid" to wordid,
@@ -167,7 +210,6 @@ class FirebaseSource {
             .get()
             .addOnCompleteListener { task1 ->
                 for (document in task1.result) {
-                    //Fetch from database as Map
                     if (document == task1.result) {
                     } else {
                         flag = 1
@@ -178,6 +220,7 @@ class FirebaseSource {
                     db.collection("users2").document(mail).collection("favwords")
                         .add(word)
                         .addOnSuccessListener {
+
                             //Toast.makeText(activity, "Added to Fav!", Toast.LENGTH_SHORT).show()
                         }
                         .addOnFailureListener { e ->
@@ -188,42 +231,43 @@ class FirebaseSource {
                 }
             }
     }
-    fun addFavv(mail: String, wordid: String, english: String, turkish: String) {
+
+    fun addWord(mail:String, wordid: String, english: String, turkish: String) = Completable.create{ emitter ->
+        Log.d("TAG", "ADDED THE WORD2")
+        var db = Firebase.firestore
         val word = hashMapOf(
             "wordid" to wordid,
             "english" to english,
             "turkish" to turkish
         )
-
-        var flag: Int = 0
-        db.collection("fav")
-            .whereEqualTo("english", english)
-            .whereEqualTo("turkish", turkish)
-            .get()
-            .addOnCompleteListener { task1 ->
-                for (document in task1.result) {
-                    //Fetch from database as Map
-                    if (document == task1.result) {
-                    } else {
-                        flag = 1
-                        //Toast.makeText(activity, "Already in list", Toast.LENGTH_SHORT).show()
-                    }
-                }
-                if (flag != 1) {
-                    db.collection("fav")
-                        .add(word)
-                        .addOnSuccessListener {
-                            //Toast.makeText(activity, "Added to Fav!", Toast.LENGTH_SHORT).show()
-                        }
-                        .addOnFailureListener { e ->
-                            Log.w("TAG", "Error adding document", e)
-                            //Toast.makeText(activity, "Error adding document", Toast.LENGTH_SHORT).show()
-                        }
-                    //Toast.makeText(activity, "Added to Fav!", Toast.LENGTH_SHORT).show()
-                }
+        db.collection("users2").document(mail).collection("addedwords")
+            .add(word)
+            .addOnSuccessListener { documentReference ->
+                //Toast.makeText(this, "New Word Added!", Toast.LENGTH_SHORT).show()
+                Log.d("TAG", "DocumentSnapshot added with ID: ${documentReference.id}")
+            }
+            .addOnFailureListener { e ->
+                //Toast.makeText(activity, "CANNOT ADDED", Toast.LENGTH_SHORT).show()
+                Log.w("TAG", "Error adding document", e)
             }
     }
 
+    fun setLevel(mail:String, wordid: String, level: String){
+        Log.d("TAG","Level setting is successful")
+        var db = Firebase.firestore
+        val wordLevel = hashMapOf(
+            "wordid" to wordid,
+            "level" to level
+        )
+        db.collection("users2").document(mail).collection("learning")
+            .add(wordLevel)
+            .addOnSuccessListener { documentReference ->
+                Log.d("TAG", "DocumentSnapshot added with ID: ${documentReference.id}")
+            }
+            .addOnFailureListener { e ->
+                Log.w("TAG", "Error adding document", e)
+            }
+    }
 
 
 
