@@ -91,7 +91,6 @@ class AddedWordsFragment : Fragment(), KodeinAware {
                 customAdapterAddedWords.filter.filter(s)
             }
         })
-        // Inflate the layout for this fragment
         return binding.root
     }
 
